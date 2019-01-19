@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./dashboard/MainView/app.css";
+import App from "./dashboard/MainView/mainView";
 import * as serviceWorker from "./serviceWorker";
 
 import { ApolloClient } from "apollo-client";
