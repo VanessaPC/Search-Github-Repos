@@ -36,6 +36,7 @@ export const fetchRepositoryInformationSuccess = (
   type: FETCH_REPOSITORY_INFORMATION_SUCCESS,
   payload: { ...repositoryDetails }
 });
+
 export const fetchRepositoryInformationFailure = (message: string) => ({
   type: FETCH_REPOSITORY_INFORMATION_FAILURE,
   payload: message

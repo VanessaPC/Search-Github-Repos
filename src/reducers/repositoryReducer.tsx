@@ -6,17 +6,21 @@ import {
   FETCH_REPOSITORY_INFORMATION_FAILURE,
   FETCH_REPOSITORY_INFORMATION
 } from "../actions";
-import { string } from "postcss-selector-parser";
-
-const initialState = {
-  isLoading: false,
-  error: null
-};
 
 interface Action {
   payload: {} | [];
   type: string;
 }
+
+interface State {
+  isLoading: boolean;
+  error: string;
+}
+
+const initialState = {
+  isLoading: false,
+  error: null
+};
 
 export const organizationReducer = (
   state: {} = initialState,

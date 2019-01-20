@@ -18,9 +18,14 @@ const RepositoryDetails = (
   props: RepositoryDetailsProps,
   state: RepositoryDetailsState
 ) => {
+  if (!props.repository) return null;
   return (
     <section>
-      <h2>details </h2>
+      <div>
+        <p>name: </p>
+        <h2>{props.repository.name}</h2>
+      </div>
+
       {props.repository && props.repository.assignableUsers && (
         <p>{props.repository.assignableUsers.totalCount}</p>
       )}

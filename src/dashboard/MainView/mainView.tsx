@@ -22,11 +22,11 @@ class MainView extends React.Component<MainViewProps, MainViewState> {
 
   render() {
     return (
-      <main>
-        <div className="sidebar">
+      <main className="app-container">
+        <div className="app-container__sidebar">
           <RepositoryList />
         </div>
-        <div className="main-content">
+        <div className="app-container__view">
           <Router>
             <RepositoryDetails path="/repository/:repositoryId" />
           </Router>
