@@ -1,53 +1,38 @@
-import React from "react";
-import logo from "../../logo.svg";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchOrganization } from "../../actions";
+
 import "./app.css";
 
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import RepositoryList from "../RepositoryList/repositoryList";
 
-const GET_REPOSITORIES = gql`
-  {
-    organization(login: "facebook") {
-      repositories(first: 60) {
-        edges {
-          node {
-            id
-            name
-            url
-          }
-        }
-      }
-    }
+class MainView extends Component {
+  constructor(props) {
+    super(props);
+    this.props.fetchOrganization();
   }
-`;
 
-const App = () => (
-  <Query query={GET_REPOSITORIES}>
-    {({ data: { organization }, loading }) => {
-      if (loading || !organization) {
-        return <div>Loading</div>;
-      }
-      return (
-        <div>
-          <RepositoryList repositories={organization.repositories} />
-        </div>
-      );
-    }}
-  </Query>
-);
+  render() {
+    return (
+      <div>
+        <RepositoryList />
+      </div>
+    );
+  }
+}
 
-const RepositoryList = ({ repositories }) => (
-  <ul>
-    {repositories.edges.map(({ node }) => {
-      return (
-        <li key={node.id}>
-          <a href={node.url} target="_blank" rel="noopener noreferer">
-            {node.name}
-          </a>
-        </li>
-      );
-    })}
-  </ul>
-);
+const mapStateToProps = state => ({ ...state });
 
-export default App;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchOrganization
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainView);
