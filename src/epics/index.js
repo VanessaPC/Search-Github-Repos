@@ -1,12 +1,10 @@
 import { combineEpics } from "redux-observable";
 import gql from "graphql-tag";
 
-// import { Observable } from "rxjs";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/operator/map";
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/catch";
-// import { ajax } from "rxjs/observable/dom/ajax";
 
 import {
   FETCH_ORGANIZATION,
@@ -66,7 +64,9 @@ function fetchRepositoryEpic(action$, state$, { client }) {
           }
         `
       })
-      .then(result => fetchRepositoryInformationSuccess(result));
+      .then(result =>
+        fetchRepositoryInformationSuccess(result.data.repository)
+      );
   });
 }
 

@@ -13,8 +13,15 @@ const initialState = {
   error: null
 };
 
-export default (state = initialState, action) => {
-  console.log("payload: ", action.payload);
+interface Action {
+  payload: {} | [];
+  type: string;
+}
+
+export const organizationReducer = (
+  state: {} = initialState,
+  action: Action
+) => {
   switch (action.type) {
     case FETCH_ORGANIZATION:
       return {
@@ -35,6 +42,14 @@ export default (state = initialState, action) => {
         isLoading: false,
         error: action.payload
       };
+    default:
+      return state;
+  }
+};
+
+export const repositoryReducer = (state: {} = initialState, action: Action) => {
+  console.log("payload: ", action.payload);
+  switch (action.type) {
     case FETCH_REPOSITORY_INFORMATION:
       return {
         ...state,

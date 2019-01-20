@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./dashboard/MainView/app.css";
+import "./styles.scss";
 import MainView from "./dashboard/MainView/mainView";
 import * as serviceWorker from "./serviceWorker";
 

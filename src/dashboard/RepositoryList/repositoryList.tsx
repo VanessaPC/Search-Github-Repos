@@ -4,12 +4,29 @@ import { bindActionCreators } from "redux";
 import { fetchRepositoryInformation } from "../../actions";
 import { Link } from "@reach/router";
 
-class RepositoryList extends Component {
-  fetchDetails = repoName => {
+import { Organization } from "../../utils/types";
+
+interface RepositoryListProps {
+  organization: Organization;
+  isLoading?: boolean;
+  error?: string;
+
+  fetchRepositoryInformation: (repositoryName: string) => Object;
+}
+
+interface RepositoryListState {
+  organization: Organization;
+}
+
+class RepositoryList extends React.Component<
+  RepositoryListProps,
+  RepositoryListState
+> {
+  fetchDetails = (repoName: string) => {
     this.props.fetchRepositoryInformation(repoName);
   };
 
-  displayList = organization => (
+  displayList = (organization: Organization) => (
     <div>
       {this.props.isLoading && <h1>coming!</h1>}
       {!this.props.isLoading &&
@@ -32,7 +49,7 @@ class RepositoryList extends Component {
   );
 
   render() {
-    const organization = this.props.organization;
+    const organization: Organization = this.props.organization;
     return (
       <div>
         <h1>sidebar:</h1>
@@ -42,11 +59,11 @@ class RepositoryList extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: RepositoryListState) => {
   return { ...state, organization: state.organization };
 };
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
       fetchRepositoryInformation

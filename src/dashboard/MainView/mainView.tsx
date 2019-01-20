@@ -3,15 +3,19 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchOrganization } from "../../actions";
 
-import { Router, Link } from "@reach/router";
-
-import "./app.css";
+import { Router } from "@reach/router";
 
 import RepositoryList from "../RepositoryList/repositoryList";
 import RepositoryDetails from "../RepositoryDetails/repositoryDetails";
 
-class MainView extends Component {
-  constructor(props) {
+interface MainViewProps {
+  fetchOrganization: () => {};
+}
+
+interface MainViewState {}
+
+class MainView extends React.Component<MainViewProps, MainViewState> {
+  constructor(props: MainViewProps) {
     super(props);
     this.props.fetchOrganization();
   }
@@ -32,9 +36,9 @@ class MainView extends Component {
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = (state: MainViewState) => ({ ...state });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
       fetchOrganization
