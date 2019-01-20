@@ -10,10 +10,11 @@ import "rxjs/add/operator/catch";
 
 import {
   FETCH_ORGANIZATION,
-  fetchOrganizationSuccess
+  fetchOrganizationSuccess,
   //   FETCH_ORGANIZATION_SUCCESS,
   //   FETCH_ORGANIZATION_FAILURE,
-  //   FETCH_REPOSITORY_INFORMATION,
+  FETCH_REPOSITORY_INFORMATION,
+  fetchRepositoryInformationSuccess
   //   FETCH_REPOSITORY_INFORMATION_SUCCESS,
   //   FETCH_REPOSITORY_INFORMATION_FAILURE
 } from "../actions";
@@ -51,4 +52,25 @@ function fetchOrganizationEpic(action$, state$, { client }) {
     });
 }
 
-export const rootEpic = combineEpics(fetchOrganizationEpic);
+function fetchRepositoryEpic(action$, state$, { client }) {
+  return action$.ofType(FETCH_REPOSITORY_INFORMATION).switchMap(action => {
+    return client
+      .query({
+        query: gql`
+          {
+            repository(name: "${action.payload}", owner: "facebook") {
+              assignableUsers {
+                totalCount
+              }
+            }
+          }
+        `
+      })
+      .then(result => fetchRepositoryInformationSuccess(result));
+  });
+}
+
+export const rootEpic = combineEpics(
+  fetchOrganizationEpic,
+  fetchRepositoryEpic
+);

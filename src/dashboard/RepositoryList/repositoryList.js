@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchOrganization } from "../../actions";
+import { fetchRepositoryInformation } from "../../actions";
+import { Link } from "@reach/router";
 
 class RepositoryList extends Component {
+  fetchDetails = repoName => {
+    this.props.fetchRepositoryInformation(repoName);
+  };
+
   displayList = organization => (
     <div>
       {this.props.isLoading && <h1>coming!</h1>}
@@ -13,7 +18,12 @@ class RepositoryList extends Component {
         organization.repositories.edges.map(({ node }) => {
           return (
             <li key={node.id}>
-              <a href={node.url}>{node.name}</a>
+              <Link
+                to={`repository/${node.name}`}
+                onClick={this.fetchDetails.bind(this, node.name)}
+              >
+                {node.name}
+              </Link>
             </li>
           );
         })}
@@ -22,7 +32,6 @@ class RepositoryList extends Component {
   );
 
   render() {
-    console.log("props in sidebar? ", this.props);
     const organization = this.props.organization;
     return (
       <div>
@@ -40,7 +49,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchOrganization
+      fetchRepositoryInformation
     },
     dispatch
   );

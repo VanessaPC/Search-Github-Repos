@@ -12,11 +12,6 @@ export const fetchOrganization = () => ({
 });
 
 export const fetchOrganizationSuccess = organization => {
-  console.log("action", organization);
-  console.log("whats here: ", {
-    type: "FETCH_ORGANIZATION_SUCCESS",
-    payload: organization
-  });
   return {
     type: FETCH_ORGANIZATION_SUCCESS,
     payload: { ...organization }
@@ -28,13 +23,16 @@ export const fetchOrganizationFailure = message => ({
   payload: message
 });
 
-export const fetchRepositoryInformation = () => ({
-  type: FETCH_REPOSITORY_INFORMATION
+export const fetchRepositoryInformation = repositoryName => ({
+  type: FETCH_REPOSITORY_INFORMATION,
+  payload: repositoryName
 });
 
-export const fetchRepositoryInformationSuccess = () => ({
-  type: FETCH_REPOSITORY_INFORMATION_SUCCESS
+export const fetchRepositoryInformationSuccess = repositoryDetails => ({
+  type: FETCH_REPOSITORY_INFORMATION_SUCCESS,
+  payload: { ...repositoryDetails }
 });
-export const fetchRepositoryInformationFailure = () => ({
-  type: FETCH_REPOSITORY_INFORMATION_FAILURE
+export const fetchRepositoryInformationFailure = message => ({
+  type: FETCH_REPOSITORY_INFORMATION_FAILURE,
+  payload: message
 });

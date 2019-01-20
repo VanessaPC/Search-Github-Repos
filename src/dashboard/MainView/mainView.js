@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchOrganization } from "../../actions";
 
+import { Router, Link } from "@reach/router";
+
 import "./app.css";
 
 import RepositoryList from "../RepositoryList/repositoryList";
+import RepositoryDetails from "../RepositoryDetails/repositoryDetails";
 
 class MainView extends Component {
   constructor(props) {
@@ -15,9 +18,16 @@ class MainView extends Component {
 
   render() {
     return (
-      <div>
-        <RepositoryList />
-      </div>
+      <main>
+        <div className="sidebar">
+          <RepositoryList />
+        </div>
+        <div className="main-content">
+          <Router>
+            <RepositoryDetails path="/repository/:repositoryId" />
+          </Router>
+        </div>
+      </main>
     );
   }
 }
