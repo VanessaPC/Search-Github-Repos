@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -20,7 +20,6 @@ interface RepositoryDetailsState {
 }
 
 const RepositoryInformation = (
-  description: string,
   forkCount: number,
   hasWikiEnabled: boolean,
   isArchived: boolean,
@@ -32,7 +31,6 @@ const RepositoryInformation = (
     <div className="details-description">
       <p className="annotation">Details: </p>
       <div className="details-description__container">
-        <p className="small-text">{description}</p>
         <p className="small-text">ForkCount: {forkCount}</p>
         <p className="small-text">
           {hasWikiEnabled ? "Wiki enabled." : "Wiki not enabled."}
@@ -100,12 +98,13 @@ const Contributors = (contributors: [RepositoryContributors]) => {
   );
 };
 
-const Title = (name: string, date: string) => {
+const Title = (name: string, date: string, description: string) => {
   return (
     <div>
       <span className="annotation">Repository: </span>
       <span className="title">{name}</span>
       <p className="small-text">Created on: {date}</p>
+      <p className="small-text">{description}</p>
     </div>
   );
 };
@@ -115,13 +114,20 @@ const RepositoryDetails = (
   state: RepositoryDetailsState
 ) => {
   if (!props.repository || !props.repository.name) {
-    return null;
+    return (
+      <div className="details-message">
+        <h3> Click on a repo to see the details!</h3>
+      </div>
+    );
   } else {
     return (
       <section className="details-container">
-        {Title(props.repository.name, props.repository.createdAt)}
+        {Title(
+          props.repository.name,
+          props.repository.createdAt,
+          props.repository.description
+        )}
         {RepositoryInformation(
-          props.repository.description,
           props.repository.forkCount,
           props.repository.hasWikiEnabled,
           props.repository.isArchived,
