@@ -1,3 +1,58 @@
+@import url("https://fonts.googleapis.com/css?family=Hind:300");
+
 @import "../src/dashboard/MainView/mainView";
 @import "../src/dashboard/RepositoryDetails/repositoryDetails";
 @import "../src/dashboard/RepositoryList/repositoryList";
+:root {
+  --main-color: #b9c44f;
+  --secondary-color: #122436;
+
+  --main-color-light: #e2f0d1;
+  --highlight: #256f69;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Hind", Helvetica, sans-serif;
+  color: var(--secondary-color);
+}
+
+.title,
+.text,
+.small-text,
+.annotation {
+  font-family: "Hind", Helvetica, sans-serif;
+  color: var(--secondary-color);
+}
+
+.annotation {
+  font-weight: 900;
+  opacity: 0.5;
+  padding: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+
+.text {
+  font-size: 1rem;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  padding: 0.5rem;
+  margin: 0;
+}

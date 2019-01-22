@@ -27,22 +27,23 @@ class RepositoryList extends React.Component<
   };
 
   displayList = (organization: Organization) => (
-    <div className="sidebar-container">
+    <div className="list-container">
       {this.props.isLoading && <div className="lds-dual-ring" />}
       {!this.props.isLoading &&
         !this.props.error &&
         organization.repositories &&
         organization.repositories.edges.map(({ node }) => {
           return (
-            <li className="sidebar-container__item" key={node.id}>
+            <li key={node.id}>
               <Link
                 to={`repository/${node.name}`}
                 onClick={this.fetchDetails.bind(this, node.name)}
+                className="text list-container__item"
               >
                 {node.name}
               </Link>
-              <span className="sidebar-container__item_number">
-                {node.watchers.totalCount}
+              <span className="list-container__item_number annotation">
+                {node.watchers.totalCount} watchers
               </span>
             </li>
           );
@@ -54,8 +55,9 @@ class RepositoryList extends React.Component<
   render() {
     const organization: Organization = this.props.organization;
     return (
-      <section className="sidebar">
-        <h2>Facebook</h2>
+      <section className="list">
+        <h1>Facebook</h1>
+        <p className="text">60 most popular repos:</p>
         {this.displayList(organization)}
       </section>
     );

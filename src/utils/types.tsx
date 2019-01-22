@@ -21,6 +21,7 @@ export interface RepositoryData {
   assignableUsers: {
     totalCount: number;
   };
+  createdAt: string;
   name: string;
   description: string;
   diskUsage: number;

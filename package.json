@@ -13,6 +13,7 @@
     "apollo-boost": "^0.1.27",
     "apollo-link": "^1.2.6",
     "apollo-link-context": "^1.0.12",
+    "devicons": "^1.8.0",
     "graphql": "^14.1.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.0-alpha.0",

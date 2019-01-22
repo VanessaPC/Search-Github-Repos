@@ -1,8 +1,13 @@
+// Main App grid
 .app {
+  margin: 0;
+  padding: 0;
   &-container {
     display: grid;
     grid-template-columns: 300px 1fr;
     &__sidebar {
+      background: var(--main-color);
+      padding: 1rem;
     }
     &__view {
     }

@@ -1,8 +1,12 @@
-.sidebar {
+.list {
   &-container {
     list-style-type: none;
     &__item {
       text-decoration: none;
+
+      &:hover {
+        color: var(--highlight);
+      }
     }
   }
 }

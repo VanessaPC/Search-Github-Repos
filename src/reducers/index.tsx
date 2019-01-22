@@ -19,6 +19,7 @@ interface State {
 
 const initialState = {
   isLoading: false,
+
   error: null
 };
 
@@ -52,7 +53,6 @@ export const organizationReducer = (
 };
 
 export const repositoryReducer = (state: {} = initialState, action: Action) => {
-  console.log("payload: ", action.payload);
   switch (action.type) {
     case FETCH_REPOSITORY_INFORMATION:
       return {
