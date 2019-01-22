@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchRepositoryInformation } from "../../actions";
 import { Link } from "@reach/router";
 
 import { Organization } from "../../utils/types";
@@ -10,8 +9,6 @@ interface RepositoryListProps {
   organization: Organization;
   isLoading?: boolean;
   error?: string;
-
-  fetchRepositoryInformation: (repositoryName: string) => Object;
 }
 
 interface RepositoryListState {
@@ -22,10 +19,6 @@ class RepositoryList extends React.Component<
   RepositoryListProps,
   RepositoryListState
 > {
-  fetchDetails = (repoName: string) => {
-    this.props.fetchRepositoryInformation(repoName);
-  };
-
   displayList = (organization: Organization) => (
     <div className="list-container">
       {this.props.isLoading && <div className="lds-dual-ring" />}
@@ -37,7 +30,6 @@ class RepositoryList extends React.Component<
             <li key={node.id}>
               <Link
                 to={`repository/${node.name}`}
-                onClick={this.fetchDetails.bind(this, node.name)}
                 className="text list-container__item"
               >
                 {node.name}
@@ -68,13 +60,7 @@ const mapStateToProps = (state: RepositoryListState) => {
   return { ...state, organization: state.organization };
 };
 
-const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators(
-    {
-      fetchRepositoryInformation
-    },
-    dispatch
-  );
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({}, dispatch);
 
 export default connect(
   mapStateToProps,

@@ -8,10 +8,15 @@ import {
   RepositoryLanguages
 } from "../../utils/types";
 
+import { fetchRepositoryInformation } from "../../actions";
+
 import { RouteComponentProps } from "@reach/router";
 
 interface RepositoryDetailsProps extends RouteComponentProps {
   repository?: RepositoryData;
+  repositoryId?: string;
+
+  fetchRepositoryInformation?: (repositoryName: string) => Object;
 }
 
 interface RepositoryDetailsState {
@@ -113,6 +118,15 @@ const RepositoryDetails = (
   props: RepositoryDetailsProps,
   state: RepositoryDetailsState
 ) => {
+  useEffect(
+    () => {
+      if (props.fetchRepositoryInformation && props.repositoryId) {
+        props.fetchRepositoryInformation(props.repositoryId);
+      }
+    },
+    [props.repositoryId]
+  );
+
   if (!props.repository || !props.repository.name) {
     return (
       <div className="details-message">
@@ -146,7 +160,13 @@ const mapStateToProps = (state: any) => {
   return { ...state, repository: state.repository };
 };
 
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch: any) =>
+  bindActionCreators(
+    {
+      fetchRepositoryInformation
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,
