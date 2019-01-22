@@ -19,10 +19,10 @@ You will also see any lint errors in the console.
 ## More
 
 The technologies used are:
-GraphQL
-Apollo
-React
-Redux
-RxJS
-Typescript
+GraphQL,
+Apollo,
+React,
+Redux,
+RxJS,
+Typescript,
 SCSS
