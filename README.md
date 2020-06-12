@@ -2,6 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+For this project you are going to need `NodeJS` as well as `Yarn` installed globally. 
 In the project directory, you can run:
 
 ### `yarn`
