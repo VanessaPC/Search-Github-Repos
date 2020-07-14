@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+It's a search connected to the Github API. You can search and organize organisations through it.
+
 ## Available Scripts
 
 For this project you are going to need `NodeJS` as well as `Yarn` installed globally. 
